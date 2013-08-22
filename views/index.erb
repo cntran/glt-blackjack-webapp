@@ -1,0 +1,24 @@
+<h1>BlackJack</h1>
+
+
+<% if @player_name === '' %>
+  <em>This is an online version of the popular casino game BlackJack developed in Ruby on Sinatra.</em>
+
+  <p>
+  Enter your name below to begin:
+  </p>
+
+  <form method="post" action="/setPlayerName">
+    <fieldset>
+      <input type="text" name="player_name" placeholder="Enter your name…" /><br />
+      <button type="submit" class="btn">Submit</button>
+    </fieldset>
+  </form>
+<% else %>
+  <p>Welcome <%= @player_name %>. Click on the button below to begin play!</p>
+
+  <form method="get" action="/game">
+    <button class="button">Play BlackJack</button>
+  </form>
+
+<% end %>
