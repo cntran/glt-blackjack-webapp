@@ -1,0 +1,14 @@
+<div id="dealer-cards" class="well">
+  <h3>Dealer's cards</h3>
+  <% @blackjack.dealer.cards.each do |card| %>
+  <%= card.value %>
+  <% end %>
+</div>
+
+
+<div id="player-cards" class="well">
+  <h3><%= @player_name %>'s cards</h3>
+  <% @blackjack.player.cards.each do |card| %>
+  <%= card.value %>
+  <% end %>
+</div>

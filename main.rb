@@ -1,16 +1,13 @@
 require 'rubygems'
 require 'sinatra'
-require 'pry'
+load 'blackjack.rb'
 
 set :sessions, true
 
 get '/' do 
 
-  @player_name = ''
-
-  if session[:player_name]
-    @player_name = session[:player_name]
-  end
+  session.delete(:player_name)
+  session.delete(:blackjack)
 
   erb :index  
 
@@ -21,11 +18,29 @@ post '/setPlayerName' do
   player_name = params[:player_name]
   session[:player_name] = player_name
 
-  redirect '/'
+  redirect '/welcome'
 
 end
 
+get '/welcome' do
+  @player_name = ''
+
+  if session[:player_name]
+    @player_name = session[:player_name]
+  end
+
+  erb :welcome
+end
+
+
 get '/game' do
-  'Game started! ' + session[:player_name]
+
+  @player_name = session[:player_name]
+  # deal cards to dealer and player
+  @blackjack = BlackJack.new(session[:player_name])
+  @blackjack.deal_cards
+
+  erb :game
+
 end
  
