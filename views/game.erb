@@ -1,14 +1,26 @@
 <div id="dealer-cards" class="well">
   <h3>Dealer's cards</h3>
-  <% @blackjack.dealer.cards.each do |card| %>
-  <%= card.value %>
-  <% end %>
+  <ul class="cards">
+    <% session[:dealer_cards].each do |card| %>
+    <li><img src="images/cards/<%= display_card_image(card) %>" /></li>
+    <% end %>
+  </ul>
 </div>
 
 
 <div id="player-cards" class="well">
-  <h3><%= @player_name %>'s cards</h3>
-  <% @blackjack.player.cards.each do |card| %>
-  <%= card.value %>
-  <% end %>
+  <h3><%= session[:player_name] %>'s cards: </h3>
+  <ul class="cards">
+    <% session[:player_cards].each do |card| %>
+    <li><img src="images/cards/<%= display_card_image(card) %>" /></li>
+    <% end %>
+  </ul>
 </div>
+
+
+<form action="/game/hit" method="post">
+  <input type="submit" value="Hit" />
+</form>
+<form action="/game/stay" method="post">
+  <input type="submit" value="Stay" />
+</form>
