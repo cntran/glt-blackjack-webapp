@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BlackJack in Ruby</title>
+    <title>Blackjack in Ruby</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Diplomata' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/application.css">
   </head>
@@ -11,17 +13,17 @@
       <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-              <li><a href="/">Play BlackJack</a></li>
+              <li id="heading"><a href="/">Rubyjack 21</a></li>
+              <li><a href="/">New Game</a></li>
+              <li><a href="/rules">Rules</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
         </div>
       </div>
     </div>
 
   <div class="container">
-    <%if @error %>
-      <div class="alert alert-error"><%=@error%></div>
-    <% end %>
-      <%= yield %>
+    <%= yield %>
   </div>
   </body>
 </html>

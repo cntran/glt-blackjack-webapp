@@ -1,5 +1,40 @@
-.cards { list-style: none; }
+body { 
+  background: #905336 url("images/background.png") repeat;
+  color: #F7F7F7; 
+  font-family: 'Open Sans', Arial; 
+  font-size: 0.8em; 
+}
+p { line-height: 24px; }
+h1 { font-family: 'Open Sans', Georgia; font-size: 24px; }
+h2 { font-family: 'Open Sans', Georgia; font-size: 20px; }
+h3 { font-family: 'Open Sans', Georgia; font-size: 14px; }
+.clear { clear: both; }
+.alert { color: #620A0E; font-weight: bold; }
+.alert-green { font-size: 30px; color: #5bb75b; }
+
+
+.navbar-inner { background: #620A0E; }
+.navbar .nav>li>a { color: #FFFFFF; text-shadow: none; }
+.navbar .nav>li>a:hover { color: #FFFF00; }
+
+#heading { font-family: 'Diplomata', Georgia; font-size: 22px;  }
+#heading a { color: #FFFF00; text-shadow:2px 2px #FF0000; padding-left: 0;}
+
+#game-table { background: #5bb75b; border-radius: 10px; padding: 10px 15px; }
+#game-table h2 { font-family: 'Diplomata', Georgia; font-size: 18px; color: #FFFFFF; text-transform: uppercase; text-align: center; }
+.cards { list-style: none; text-align: center; }
 .cards li { display: inline-block; margin-right: 5px; }
+.cards li img {  width: 100px; }
 
+.game-progress { font-family: 'Diplomata', Georgia; }
+.game-progress .score {  font-size: 36px; }
+.game-progress ul { list-style: none; text-align: center; }
+.game-progress li { display: inline-block; margin: 30px 20px;}
+.game-progress li#dealer-score,
+.game-progress li#player-score { color: #620A0E; background: #FFFF00; padding: 15px; border-radius: 4px; }
 
+.game-actions { margin: 0 auto; text-align: center; }
+#stay, #hit { display: inline-block; margin: 5px; }
 
+.game-win { text-align: center; font-size: 36px; margin: 0 0 20px 0;}
+.game-loss { text-align: center; font-size: 36px; margin: 0 0 20px 0;}

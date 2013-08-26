@@ -1,3 +1,10 @@
-<p>Welcome <strong><%= @player_name %></strong>. Are you ready to play BlackJack? Click on the link below to begin!</p>
+<h2>Welcome <%= session[:player_name] %>. You have <span class='alert-green'>$<%= session[:player_balance] %></span> to play with.</h2>
 
-<a href="/game">Play BlackJack</a>
+<form action="/game" method="post" class="form-inline">
+  <label for="bet">$</label>&nbsp;<input type="text" name="bet" value="" placeholder="Enter your bet amount" />&nbsp;
+  <input type="submit" value="Place bet" class="btn btn-success" />
+</form>
+
+<% if @error %>
+  <div class="alert alert-error"><%=@error %></div>
+<% end %>

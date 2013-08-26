@@ -1,17 +1,15 @@
-<h1>BlackJack</h1>
+<h1>Welcome</h1>
 
-<em>This is an online version of the popular casino game BlackJack developed in Ruby on Sinatra.</em>
+<p><em>This is an online version of the popular casino game Blackjack developed in Ruby on Sinatra.</em></p>
 
-<p>
-Enter your name below to begin:
-</p>
-
-<form method="post" action="/setPlayerName">
+<form method="post" action="/setPlayerName" class="form-inline">
   <fieldset>
-    <input type="text" name="player_name" placeholder="Enter your name…" /><br />
-    <button type="submit" class="btn">Submit</button>
+    <input type="text" name="player_name" placeholder="Enter your name to begin…" />&nbsp;
+    <button type="submit" class="btn btn-success">Submit</button>
   </fieldset>
 </form>
 
-
+<%if @error %>
+  <div class="alert alert-error"><%=@error%></div>
+<% end %>
 
