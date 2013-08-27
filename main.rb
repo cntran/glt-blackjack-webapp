@@ -116,6 +116,9 @@ post '/game' do
   elsif bet.to_i > session[:player_balance].to_i
     @error = 'You don\'t have enough cash to bet that amount.'
     halt( erb :welcome)
+  elsif bet.to_i < 0
+     @error = 'You can\'t bet a negative cash amount.'
+    halt( erb :welcome)
   end
 
   session[:bet] = bet
@@ -136,14 +139,18 @@ post '/game' do
 
   # Check if player already has blackjack, if so end game
   player_hand_value = calculate_total(session[:player_cards])
+
   if player_hand_value == 21
     @show_player_actions = false
     @game_over = true
+    @success = 'You hit Blackjack! You win! :)'
     session[:player_balance] = session[:player_balance].to_i + session[:bet].to_i
+  else
+    @show_player_actions = true
   end
 
-  @show_player_actions = true
   @dealer_turn = false
+
   erb :game
 
 end
@@ -160,7 +167,6 @@ post '/game/hit' do
     @error = 'Looks like you busted. :(' 
     @show_player_actions = false
     @game_over = true
-    @success = 'You hit Blackjack! You win! :)'
     session[:player_balance] = session[:player_balance].to_i - session[:bet].to_i
   end
 
@@ -181,6 +187,7 @@ post '/game/stay' do
   if dealer_hand_value > 16 # end game and determine winner
 
     # Check if dealer already has blackjack, if so end game
+
     if dealer_hand_value == 21
       @error = 'Sorry, Dealer has blackjack. You lose. :('
       session[:player_balance] = session[:player_balance].to_i - session[:bet].to_i
