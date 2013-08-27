@@ -8,9 +8,9 @@
       <% session[:dealer_cards].each do |card| %>
       <li>
         <% if count == 0 && @dealer_turn == false %>
-        <img src="http://localhost:9393/images/cards/cover.jpg" class="img-polaroid" />
+        <img src="/images/cards/cover.jpg" class="img-polaroid" />
         <% else %>
-        <img src="http://localhost:9393/images/cards/<%= display_card_image(card) %>" class="img-polaroid" />
+        <img src="/images/cards/<%= display_card_image(card) %>" class="img-polaroid" />
         <% end %>
       </li>
       <% count += 1 %>
@@ -23,7 +23,7 @@
     <h2><%= session[:player_name] %>'s cards</h2>
     <ul class="cards">
       <% session[:player_cards].each do |card| %>
-      <li><img src="http://localhost:9393/images/cards/<%= display_card_image(card) %>" class="img-polaroid" /></li>
+      <li><img src="/images/cards/<%= display_card_image(card) %>" class="img-polaroid" /></li>
       <% end %>
     </ul>
   </div>
@@ -68,7 +68,7 @@
   <% elsif @dealer_turn && !@game_over %>
     
     
-    <form id="hit" action="/game/hit/dealer" method="post">
+    <form id="dealer-hit" action="/game/hit/dealer" method="post">
       <input type="submit" value="Reveal Dealer's next card" class="btn btn-primary btn-large" />
     </form>
 
@@ -77,8 +77,8 @@
 
 
   <% if @game_over && session[:player_balance].to_i > 0 %>
-    <form id="hit" action="/welcome" method="get">
-      <input type="submit" value="Play again?" class="btn btn-primary btn-large" />
+    <form id="replay" action="/welcome" method="get">
+      <input type="submit" value="Replay?" class="btn btn-primary btn-large" />
     </form>
   <% elsif @game_over %>
     <div class="game-loss">Sorry you are out of cash! :(</div>

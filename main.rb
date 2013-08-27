@@ -133,6 +133,15 @@ post '/game' do
   session[:dealer_cards] << session[:deck].pop
   session[:player_cards] << session[:deck].pop
 
+
+  # Check if player already has blackjack, if so end game
+  player_hand_value = calculate_total(session[:player_cards])
+  if player_hand_value == 21
+    @show_player_actions = false
+    @game_over = true
+    session[:player_balance] = session[:player_balance].to_i + session[:bet].to_i
+  end
+
   @show_player_actions = true
   @dealer_turn = false
   erb :game
@@ -151,10 +160,11 @@ post '/game/hit' do
     @error = 'Looks like you busted. :(' 
     @show_player_actions = false
     @game_over = true
+    @success = 'You hit Blackjack! You win! :)'
     session[:player_balance] = session[:player_balance].to_i - session[:bet].to_i
   end
 
-  erb :game
+  erb :game, layout: false
 
 end
 
@@ -170,7 +180,11 @@ post '/game/stay' do
 
   if dealer_hand_value > 16 # end game and determine winner
 
-    if player_hand_value > dealer_hand_value  
+    # Check if dealer already has blackjack, if so end game
+    if dealer_hand_value == 21
+      @error = 'Sorry, Dealer has blackjack. You lose. :('
+      session[:player_balance] = session[:player_balance].to_i - session[:bet].to_i
+    elsif player_hand_value > dealer_hand_value  
       @success = 'You win! :)'
       session[:player_balance] = session[:player_balance].to_i + session[:bet].to_i
     elsif player_hand_value < dealer_hand_value
@@ -184,7 +198,7 @@ post '/game/stay' do
 
   end
 
-  erb :game
+  erb :game, layout: false
 
 end
 
@@ -199,8 +213,11 @@ post '/game/hit/dealer' do
   dealer_hand_value = calculate_total(session[:dealer_cards])
 
   if dealer_hand_value > 21
+    
     @success = 'Dealer busts! You win! :)' 
+    session[:player_balance] = session[:player_balance].to_i + session[:bet].to_i
     @game_over = true
+
   elsif dealer_hand_value > 16
 
     if player_hand_value > dealer_hand_value  
